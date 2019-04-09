@@ -1,0 +1,48 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "businessUnit",
+            "otherEntityName": "businessUnit",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "login"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "position",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "salary",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "distance",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "flexibility",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "longevity",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171015003440",
+    "entityTableName": "job_opportunity",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

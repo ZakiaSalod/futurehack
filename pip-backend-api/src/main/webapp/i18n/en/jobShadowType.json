@@ -1,0 +1,10 @@
+{
+    "pipApp": {
+        "JobShadowType" : {
+            "null": "",
+            "INDIVIDUAL": "INDIVIDUAL",
+            "MEDIUM": "MEDIUM",
+            "LARGE": "LARGE"
+        }
+    }
+}

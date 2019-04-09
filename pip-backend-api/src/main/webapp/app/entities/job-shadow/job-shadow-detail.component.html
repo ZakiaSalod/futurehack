@@ -1,0 +1,51 @@
+
+<div *ngIf="jobShadow">
+    <h2><span jhiTranslate="pipApp.jobShadow.detail.title">Job Shadow</span> {{jobShadow.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pipApp.jobShadow.datetime">Datetime</span></dt>
+        <dd>
+            <span>{{jobShadow.datetime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pipApp.jobShadow.capacity">Capacity</span></dt>
+        <dd>
+            <span>{{jobShadow.capacity}}</span>
+        </dd>
+        <dt><span jhiTranslate="pipApp.jobShadow.jobShadowType">Job Shadow Type</span></dt>
+        <dd>
+            <span jhiTranslate="{{'pipApp.JobShadowType.' + jobShadow.jobShadowType}}">{{jobShadow.jobShadowType}}</span>
+        </dd>
+        <dt><span jhiTranslate="pipApp.jobShadow.transport">Transport</span></dt>
+        <dd>
+            <span>{{jobShadow.transport}}</span>
+        </dd>
+        <dt><span jhiTranslate="pipApp.jobShadow.lunch">Lunch</span></dt>
+        <dd>
+            <span>{{jobShadow.lunch}}</span>
+        </dd>
+        <dt><span jhiTranslate="pipApp.jobShadow.businessUnit">Business Unit</span></dt>
+        <dd>
+            <div *ngIf="jobShadow.businessUnit">
+                <a [routerLink]="['/business-unit', jobShadow.businessUnit?.id]">{{jobShadow.businessUnit?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="pipApp.jobShadow.user">User</span></dt>
+        <dd>
+            {{jobShadow.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'job-shadow/'+ jobShadow.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

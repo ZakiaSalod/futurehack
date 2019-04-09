@@ -1,0 +1,29 @@
+{
+    "pipApp": {
+        "jobOpportunity" : {
+            "home": {
+                "title": "JobOpportunities",
+                "createLabel": "Créer un nouveau Job Opportunity",
+                "createOrEditLabel": "Créer ou éditer un Job Opportunity",
+                "search": "Recherche pour Job Opportunity"
+            },
+            "created": "Un nouveau Job Opportunity a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Job Opportunity avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Job Opportunity avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Job Opportunity {{ id }} ?"
+            },
+            "detail": {
+                "title": "Job Opportunity"
+            },
+            "title": "Title",
+            "position": "Position",
+            "salary": "Salary",
+            "distance": "Distance",
+            "flexibility": "Flexibility",
+            "longevity": "Longevity",
+            "businessUnit": "Business Unit",
+            "user": "User"
+        }
+    }
+}

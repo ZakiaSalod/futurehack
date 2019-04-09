@@ -1,0 +1,69 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myJobShadowLabel" jhiTranslate="pipApp.jobShadow.home.createOrEditLabel">Create or edit a Job Shadow</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!jobShadow.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="jobShadow.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pipApp.jobShadow.datetime" for="field_datetime">Datetime</label>
+            <div class="d-flex">
+                <input id="field_datetime" type="datetime-local" class="form-control" name="datetime" [(ngModel)]="jobShadow.datetime"
+                  />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pipApp.jobShadow.capacity" for="field_capacity">Capacity</label>
+            <input type="number" class="form-control" name="capacity" id="field_capacity"
+                [(ngModel)]="jobShadow.capacity"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pipApp.jobShadow.jobShadowType" for="field_jobShadowType">Job Shadow Type</label>
+            <select class="form-control" name="jobShadowType" [(ngModel)]="jobShadow.jobShadowType" id="field_jobShadowType" >
+                <option value="INDIVIDUAL">{{'pipApp.JobShadowType.INDIVIDUAL' | translate}}</option>
+                <option value="MEDIUM">{{'pipApp.JobShadowType.MEDIUM' | translate}}</option>
+                <option value="LARGE">{{'pipApp.JobShadowType.LARGE' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pipApp.jobShadow.transport" for="field_transport">Transport</label>
+            <input type="checkbox" class="form-control" name="transport" id="field_transport"
+                [(ngModel)]="jobShadow.transport"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pipApp.jobShadow.lunch" for="field_lunch">Lunch</label>
+            <input type="checkbox" class="form-control" name="lunch" id="field_lunch"
+                [(ngModel)]="jobShadow.lunch"  />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pipApp.jobShadow.businessUnit" for="field_businessUnit">Business Unit</label>
+            <select class="form-control" id="field_businessUnit" name="businessUnit" [(ngModel)]="jobShadow.businessUnit" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="businessUnitOption.id === jobShadow.businessUnit?.id ? jobShadow.businessUnit : businessUnitOption" *ngFor="let businessUnitOption of businessunits; trackBy: trackBusinessUnitById">{{businessUnitOption.unitName}}</option>
+            </select>
+        </div>
+        <div class="form-group" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <label class="form-control-label" jhiTranslate="pipApp.jobShadow.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="jobShadow.user" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === jobShadow.user?.id ? jobShadow.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

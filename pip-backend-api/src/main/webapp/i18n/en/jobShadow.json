@@ -1,0 +1,28 @@
+{
+    "pipApp": {
+        "jobShadow" : {
+            "home": {
+                "title": "Job Shadows",
+                "createLabel": "Create a new Job Shadow",
+                "createOrEditLabel": "Create or edit a Job Shadow",
+                "search": "Search for Job Shadow"
+            },
+            "created": "A new Job Shadow is created with identifier {{ param }}",
+            "updated": "A Job Shadow is updated with identifier {{ param }}",
+            "deleted": "A Job Shadow is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Job Shadow {{ id }}?"
+            },
+            "detail": {
+                "title": "Job Shadow"
+            },
+            "datetime": "Datetime",
+            "capacity": "Capacity",
+            "jobShadowType": "Job Shadow Type",
+            "transport": "Transport",
+            "lunch": "Lunch",
+            "businessUnit": "Business Unit",
+            "user": "User"
+        }
+    }
+}

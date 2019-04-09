@@ -1,0 +1,79 @@
+<div>
+    <h2>
+        <span jhiTranslate="pipApp.businessUnit.home.title">Business Units</span>
+        <button class="btn btn-primary float-right jh-create-entity create-business-unit" [routerLink]="['/', { outlets: { popup: ['business-unit-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="pipApp.businessUnit.home.createLabel">
+            Create new Business Unit
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'pipApp.businessUnit.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="businessUnits">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <!--<th><span jhiTranslate="global.field.id">ID</span></th>-->
+            <th><span jhiTranslate="pipApp.businessUnit.unitName">Unit Name</span></th>
+            <th><span jhiTranslate="pipApp.businessUnit.size">Size</span></th>
+            <!--<th><span jhiTranslate="pipApp.businessUnit.address">Address</span></th>-->
+            <th><span jhiTranslate="pipApp.businessUnit.industry">Industry(s)</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let businessUnit of businessUnits ;trackBy: trackId">
+                <!--<td><a [routerLink]="['../business-unit', businessUnit.id ]">{{businessUnit.id}}</a></td>-->
+                <td>{{businessUnit.unitName}}</td>
+                <td>{{businessUnit.size}}</td>
+                <!--<td>{{businessUnit.address}}</td>-->
+                <td>
+                    <span *ngFor="let industry of businessUnit.industries; let last = last">
+                            <a class="form-control-static" [routerLink]="['../industry', industry?.id ]">{{industry.name}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../business-unit', businessUnit.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'business-unit/'+ businessUnit.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'business-unit/'+ businessUnit.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

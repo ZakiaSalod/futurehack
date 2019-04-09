@@ -1,0 +1,45 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "businessUnit",
+            "otherEntityName": "businessUnit",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "login"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "datetime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "capacity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "jobShadowType",
+            "fieldType": "JobShadowType",
+            "fieldValues": "INDIVIDUAL,MEDIUM,LARGE"
+        },
+        {
+            "fieldName": "transport",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "lunch",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20171015003441",
+    "entityTableName": "job_shadow",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

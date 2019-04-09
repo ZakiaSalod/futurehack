@@ -1,0 +1,69 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myJobOpportunityLabel" jhiTranslate="pipApp.jobOpportunity.home.createOrEditLabel">Create or edit a Job Opportunity</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!jobOpportunity.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="jobOpportunity.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pipApp.jobOpportunity.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                [(ngModel)]="jobOpportunity.title"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pipApp.jobOpportunity.position" for="field_position">Position</label>
+            <input type="text" class="form-control" name="position" id="field_position"
+                [(ngModel)]="jobOpportunity.position"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pipApp.jobOpportunity.salary" for="field_salary">Salary</label>
+            <input type="number" class="form-control" name="salary" id="field_salary"
+                [(ngModel)]="jobOpportunity.salary"  />
+        </div>
+        <div class="form-group" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <label class="form-control-label" jhiTranslate="pipApp.jobOpportunity.distance" for="field_distance">Distance</label>
+            <input type="number" class="form-control" name="distance" id="field_distance"
+                [(ngModel)]="jobOpportunity.distance"  />
+        </div>
+        <div class="form-group" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <label class="form-control-label" jhiTranslate="pipApp.jobOpportunity.flexibility" for="field_flexibility">Flexibility</label>
+            <input type="number" class="form-control" name="flexibility" id="field_flexibility"
+                [(ngModel)]="jobOpportunity.flexibility"  />
+        </div>
+        <div class="form-group" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <label class="form-control-label" jhiTranslate="pipApp.jobOpportunity.longevity" for="field_longevity">Longevity</label>
+            <input type="number" class="form-control" name="longevity" id="field_longevity"
+                [(ngModel)]="jobOpportunity.longevity"  />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pipApp.jobOpportunity.businessUnit" for="field_businessUnit">Business Unit</label>
+            <select class="form-control" id="field_businessUnit" name="businessUnit" [(ngModel)]="jobOpportunity.businessUnit" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="businessUnitOption.id === jobOpportunity.businessUnit?.id ? jobOpportunity.businessUnit : businessUnitOption" *ngFor="let businessUnitOption of businessunits; trackBy: trackBusinessUnitById">{{businessUnitOption.unitName}}</option>
+            </select>
+        </div>
+        <div class="form-group" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <label class="form-control-label" jhiTranslate="pipApp.jobOpportunity.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="jobOpportunity.user" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === jobOpportunity.user?.id ? jobOpportunity.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

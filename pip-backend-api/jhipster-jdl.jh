@@ -1,0 +1,61 @@
+// an ignored comment
+/** not an ignored comment */
+
+entity Rating {
+	stars Integer
+}
+
+entity BusinessUnit {
+	unitName String required,
+    size String,
+    address String
+}
+
+entity JobOpportunity {
+	title String,
+    position String,
+    salary Integer,
+    distance Integer,
+    flexibility Integer,
+    longevity Integer
+}
+
+entity JobShadow {
+	datetime ZonedDateTime,
+	capacity Integer,
+	jobShadowType JobShadowType,
+    transport Boolean,
+    lunch Boolean
+}
+
+entity Achievement {
+	title String required,
+    description String required,
+    count Integer,
+    total Integer required
+}
+
+//    IT, SALES, EDUCATION, AUTOMOTIVE, BANKING, CONSUMER, EDUCATION
+entity Industry {
+	name String required
+}
+
+enum JobShadowType {
+    INDIVIDUAL, MEDIUM, LARGE
+}
+
+relationship OneToMany {
+	BusinessUnit{jobShadow} to JobShadow,
+    BusinessUnit{opportunity} to JobOpportunity
+}
+
+relationship ManyToOne {
+	JobShadow{user(login)} to User,
+    Achievement{user(login)} to User,
+    JobOpportunity{user(login)} to User,
+    Rating{user(login)} to User
+}
+
+relationship ManyToMany {
+	BusinessUnit{industry(name)} to Industry
+}

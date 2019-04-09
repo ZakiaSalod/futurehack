@@ -1,0 +1,47 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "jobShadow",
+            "otherEntityName": "jobShadow",
+            "otherEntityRelationshipName": "businessUnit"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "opportunity",
+            "otherEntityName": "jobOpportunity",
+            "otherEntityRelationshipName": "businessUnit"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "industry",
+            "otherEntityName": "industry",
+            "otherEntityField": "name",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "unitName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "size",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171015003439",
+    "entityTableName": "business_unit",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

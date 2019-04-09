@@ -1,0 +1,114 @@
+<div>
+    <h2>
+        <span jhiTranslate="pipApp.jobOpportunity.home.title">Job Opportunities</span>
+        <button *jhiHasAnyAuthority="['ROLE_COMPANY', 'ROLE_ADMIN']" class="btn btn-primary float-right jh-create-entity create-job-opportunity" [routerLink]="['/', { outlets: { popup: ['job-opportunity-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="pipApp.jobOpportunity.home.createLabel">
+            Create new Job Opportunity
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'pipApp.jobOpportunity.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="jobOpportunities">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <!--<th><span jhiTranslate="global.field.id">ID</span></th>-->
+            <th><span jhiTranslate="pipApp.jobOpportunity.title">Title</span></th>
+            <th><span jhiTranslate="pipApp.jobOpportunity.position">Position</span></th>
+            <th><span jhiTranslate="pipApp.jobOpportunity.salary">Salary</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_STUDENT'"><span jhiTranslate="pipApp.jobOpportunity.distance">Distance Rating</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_STUDENT'"><span jhiTranslate="pipApp.jobOpportunity.flexibility">Flexibility Rating</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_STUDENT'"><span jhiTranslate="pipApp.jobOpportunity.longevity">Longevity Rating</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_STUDENT'"><span>Company</span></th>
+            <th><span jhiTranslate="pipApp.jobOpportunity.businessUnit">Business Unit</span></th>
+            <th *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="pipApp.jobOpportunity.user">User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let jobOpportunity of jobOpportunities ;trackBy: trackId">
+                <!--<td><a [routerLink]="['../job-opportunity', jobOpportunity.id ]">{{jobOpportunity.id}}</a></td>-->
+                <td>{{jobOpportunity.title}}</td>
+                <td>{{jobOpportunity.position}}</td>
+                <td>{{jobOpportunity.salary}}</td>
+                <td *jhiHasAnyAuthority="'ROLE_STUDENT'">
+                    <ngb-progressbar type="info" [max]="10" [value]="jobOpportunity.distance" [striped]="true" [animated]="true">
+                        <span>{{jobOpportunity.distance}}</span>
+                    </ngb-progressbar>
+                </td>
+                <td *jhiHasAnyAuthority="'ROLE_STUDENT'">
+                    <ngb-progressbar type="info" [max]="10" [value]="jobOpportunity.flexibility" [striped]="true" [animated]="true">
+                        <span>{{jobOpportunity.flexibility}}</span>
+                    </ngb-progressbar>
+                </td>
+                <td *jhiHasAnyAuthority="'ROLE_STUDENT'">
+                    <ngb-progressbar type="info" [max]="10" [value]="jobOpportunity.longevity" [striped]="true" [animated]="true">
+                        <span>{{jobOpportunity.longevity}}</span>
+                    </ngb-progressbar>
+                </td>
+                <td *jhiHasAnyAuthority="'ROLE_STUDENT'">
+                    <div *ngIf="jobOpportunity.user">
+                        {{jobOpportunity.user?.firstName}}
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="jobOpportunity.businessUnit">
+                        <a [routerLink]="['../business-unit', jobOpportunity.businessUnit?.id ]" >{{jobOpportunity.businessUnit?.unitName}}</a>
+                    </div>
+                </td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    {{jobOpportunity.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div *jhiHasAnyAuthority="'ROLE_COMPANY'" class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../job-opportunity', jobOpportunity.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'job-opportunity/'+ jobOpportunity.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'job-opportunity/'+ jobOpportunity.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                    <div *jhiHasAnyAuthority="'ROLE_STUDENT'" class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                class="btn btn-success btn-sm">
+                            <span class="fa fa-long-arrow-right"></span>
+                            <span class="d-none d-md-inline">Apply</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

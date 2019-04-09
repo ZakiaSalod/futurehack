@@ -1,0 +1,55 @@
+
+<div *ngIf="jobOpportunity">
+    <h2><span jhiTranslate="pipApp.jobOpportunity.detail.title">Job Opportunity</span> {{jobOpportunity.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pipApp.jobOpportunity.title">Title</span></dt>
+        <dd>
+            <span>{{jobOpportunity.title}}</span>
+        </dd>
+        <dt><span jhiTranslate="pipApp.jobOpportunity.position">Position</span></dt>
+        <dd>
+            <span>{{jobOpportunity.position}}</span>
+        </dd>
+        <dt><span jhiTranslate="pipApp.jobOpportunity.salary">Salary</span></dt>
+        <dd>
+            <span>{{jobOpportunity.salary}}</span>
+        </dd>
+        <dt *jhiHasAnyAuthority="'ROLE_STUDENT'"><span jhiTranslate="pipApp.jobOpportunity.distance">Distance</span></dt>
+        <dd *jhiHasAnyAuthority="'ROLE_STUDENT'">
+            <span>{{jobOpportunity.distance}}</span>
+        </dd>
+        <dt *jhiHasAnyAuthority="'ROLE_STUDENT'"><span jhiTranslate="pipApp.jobOpportunity.flexibility">Flexibility</span></dt>
+        <dd *jhiHasAnyAuthority="'ROLE_STUDENT'">
+            <span>{{jobOpportunity.flexibility}}</span>
+        </dd>
+        <dt *jhiHasAnyAuthority="'ROLE_STUDENT'"><span jhiTranslate="pipApp.jobOpportunity.longevity">Longevity</span></dt>
+        <dd *jhiHasAnyAuthority="'ROLE_STUDENT'">
+            <span>{{jobOpportunity.longevity}}</span>
+        </dd>
+        <dt><span jhiTranslate="pipApp.jobOpportunity.businessUnit">Business Unit</span></dt>
+        <dd>
+            <div *ngIf="jobOpportunity.businessUnit">
+                <a [routerLink]="['/business-unit', jobOpportunity.businessUnit?.id]">{{jobOpportunity.businessUnit?.id}}</a>
+            </div>
+        </dd>
+        <dt *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="pipApp.jobOpportunity.user">User</span></dt>
+        <dd *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            {{jobOpportunity.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'job-opportunity/'+ jobOpportunity.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

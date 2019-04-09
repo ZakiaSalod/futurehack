@@ -1,0 +1,27 @@
+{
+    "pipApp": {
+        "businessUnit" : {
+            "home": {
+                "title": "Business Units",
+                "createLabel": "Create a new Business Unit",
+                "createOrEditLabel": "Create or edit a Business Unit",
+                "search": "Search for Business Unit"
+            },
+            "created": "A new Business Unit is created with identifier {{ param }}",
+            "updated": "A Business Unit is updated with identifier {{ param }}",
+            "deleted": "A Business Unit is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Business Unit {{ id }}?"
+            },
+            "detail": {
+                "title": "Business Unit"
+            },
+            "unitName": "Unit Name",
+            "size": "Size",
+            "address": "Address",
+            "jobShadow": "Job Shadow",
+            "opportunity": "Opportunity",
+            "industry": "Industry"
+        }
+    }
+}
